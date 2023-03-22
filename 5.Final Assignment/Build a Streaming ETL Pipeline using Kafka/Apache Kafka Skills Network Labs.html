@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<!-- saved from url=(0111)https://labs.cognitiveclass.ai/v2/tools/cloud-ide-kubernetes?ulid=ulid-93c19149725374a5c3ac889a48c66647e87dc8f2 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="application/javascript" async="" defer="" src="./Apache Kafka Skills Network Labs_files/track.js"></script><script type="text/javascript" async="" src="./Apache Kafka Skills Network Labs_files/O5SLs1K1RfWhBYkHvMaXTg.js"></script><script crossorigin="anonymous" integrity="sha256-FYAugp++0aS76KALjBP3ZHoZYhZeby+JJAi6MLilggc=" type="text/javascript" src="./Apache Kafka Skills Network Labs_files/appcues.main.eb0130b48fd98da1289ea671b26e63f2569b92f4.js" async=""></script><script type="text/javascript" async="" src="./Apache Kafka Skills Network Labs_files/analytics.js"></script><script async="" src="./Apache Kafka Skills Network Labs_files/l.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Labs environment for data science with Jupyter, R, and Scala.">
+    <title>Skills Network Labs</title>
+
+    
+    <script>
+      !function(){'use strict';var e=['debug','destroy','do','help','identify','is','off','on','ready','render','reset','safe','set'],t=window.noticeable=window.noticeable||[];function n(e){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(e),t.push(n),t}}t.version='2.0.0',function(){for(var r=0;r<e.length;r++){var i=e[r];t[i]=n(i)}}(),function(){var e=document.createElement('script');e.async=!0,e.src='https://sdk.noticeable.io/l.js';var t=document.head;t.insertBefore(e,t.firstChild)}()}();
+      const widgetId = '3yBUkJ9aprTWOFvB5l1l';
+      window.noticeable.on(
+        'widget:trigger_view:clicked', widgetId, () => {
+          window.noticeable.do('widget:open', widgetId);
+      });
+      window.noticeable.render("widget", widgetId);
+    </script>
+
+      <script>
+        var DEFAULT_HEARTBEAT_TIME = 1800;
+        console.log("Persisting DEFAULT_HEARTBEAT_TIME as " + DEFAULT_HEARTBEAT_TIME);
+        var INACTIVE_LOGOUT_TIME = 30;
+      </script>
+
+      
+    <!-- start Google Analytics -->
+    <script async="" src="./Apache Kafka Skills Network Labs_files/js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-1433936-16', {
+        'cookie_flags': 'SameSite=Strict;Secure'
+      });
+    </script>
+    <!-- end Google Analytics -->
+  
+
+  
+    <meta name="google-site-verification" content="">
+  
+
+  
+    <script src="./Apache Kafka Skills Network Labs_files/raven.min.js" integrity="sha384-rKlahPWcPWms7ChtWI3cD1GNFfV0mrMOXc2ZE9FO52lTge4iQDVvcatyJISSLkkX" crossorigin="anonymous" referrerpolicy="no-referrer" defer=""></script>
+    <script defer="">
+      // Once everything including subframes and stylesheets is loaded
+      window.addEventListener('load', function(){
+        function configureRaven() {
+          Raven.config('https://b052ab88487148ac9ff6eed308fd111b@sentry.skills.network/4', {
+            logger: 'monocle-frontend'
+          }).install();
+        }
+
+        if (Raven) {
+          configureRaven();
+        } else {
+          setTimeout(function(){ configureRaven(); }, 500);
+        }
+      });
+    </script>
+  
+
+    <link rel="stylesheet" type="text/css" href="./Apache Kafka Skills Network Labs_files/tailwind.css">
+    <link rel="stylesheet" type="text/css" href="./Apache Kafka Skills Network Labs_files/custom_tailwind.css">
+
+    <script src="./Apache Kafka Skills Network Labs_files/split.min.js" integrity="sha512-K6jiHca9QX/njVi724ckz3QLLDlQ2BTBFxZGz5Bi336GZLGnbgay6erqWe0ADqRdkYS8LNOZvfOarD7UxQ8orA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./Apache Kafka Skills Network Labs_files/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./Apache Kafka Skills Network Labs_files/es5.min.js" integrity="sha384-meiaV8DP8WNz9bvwGCLNXn7cvfBhAbrcy7seP0AxFqFQBqwQsdFhMSnDDw3HnLnl" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./Apache Kafka Skills Network Labs_files/browser-support-check.js" defer=""></script>
+
+    <style>
+      body {
+        overflow: hidden !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      }
+
+      div.page-container {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      div.content-wrapper {
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+
+      div.content-wrapper #markdown-instructions-wrapper {
+        height: 100%;
+        min-width: min-content;
+      }
+
+      div.content-wrapper #eclipse-theia-wrapper {
+        height: 100%;
+        min-width: min-content;
+      }
+
+      .gutter {
+        background: transparent;
+        transition: 300ms ease-in-out;
+        -webkit-transition: 300ms ease-in-out;
+        transition-property: all;
+        -webkit-transition-property: all;
+      }
+
+      .gutter:hover {
+        background: #444444;
+      }
+
+      .gutter.gutter-horizontal {
+        cursor: col-resize;
+      }
+    </style>
+  <script src="./Apache Kafka Skills Network Labs_files/37753.js" defer=""></script><iframe src="./Apache Kafka Skills Network Labs_files/saved_resource.html"></iframe><iframe src="./Apache Kafka Skills Network Labs_files/saved_resource(1).html"></iframe><iframe src="./Apache Kafka Skills Network Labs_files/saved_resource(2).html"></iframe><link rel="stylesheet" type="text/css" integrity="sha256-1ksk1w6tvNv0tSIxcv6kU+GFMdikj2NXJ9l+RWWflt4=" crossorigin="anonymous" href="./Apache Kafka Skills Network Labs_files/container.eb0130b48fd98da1289ea671b26e63f2569b92f4.css"><iframe src="./Apache Kafka Skills Network Labs_files/saved_resource(3).html"></iframe><style type="text/css" media="screen">.uv-icon{box-sizing:border-box;display:inline-block;cursor:pointer;position:relative;transition:all 300ms;width:39px;height:39px;position:fixed;z-index:100002;opacity:0.8;transition:opacity 100ms}.uv-icon.uv-bottom-right{bottom:10px;right:12px}.uv-icon.uv-top-right{top:10px;right:12px}.uv-icon.uv-bottom-left{bottom:10px;left:12px}.uv-icon.uv-top-left{top:10px;left:12px}.uv-icon.uv-is-selected{opacity:1}.uv-icon svg{width:39px;height:39px}.uv-icon .uv-tooltip-container{position:relative}.uv-icon .uv-tooltip-container .uv-icon-tooltip{display:none;position:absolute;height:20px;padding:4px 8px;background-color:#464653;color:white;font-size:12px;border-radius:4px;line-height:18px;font-family:"Open Sans", sans-serif;white-space:nowrap}.uv-icon .uv-tooltip-container .uv-icon-tooltip.left,.uv-icon .uv-tooltip-container .uv-icon-tooltip.right{top:0;bottom:0;margin:auto 10px}.uv-icon .uv-tooltip-container .uv-icon-tooltip.top,.uv-icon .uv-tooltip-container .uv-icon-tooltip.bottom{transform:translate(-30%);margin:10px auto}.uv-icon .uv-tooltip-container .uv-icon-tooltip.top{bottom:100%}.uv-icon .uv-tooltip-container .uv-icon-tooltip.bottom{top:100%}.uv-icon .uv-tooltip-container .uv-icon-tooltip.left{right:100%}.uv-icon .uv-tooltip-container .uv-icon-tooltip.right{left:100%}.uv-icon .uv-tooltip-container:hover .uv-icon-tooltip{display:block}.uv-icon-trigger{display:block;width:39px;height:39px;border:none;padding:0;cursor:pointer;background:none}.uv-popover{font-family:sans-serif;font-weight:100;font-size:13px;color:black;position:fixed;z-index:100001}.uv-popover-content{border-radius:5px;background:white;border:1px solid transparent;position:relative;width:325px;height:325px;transition:background 200ms}.uv-bottom .uv-popover-content{box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-top .uv-popover-content{box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-left .uv-popover-content{box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-right .uv-popover-content{box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-ie8 .uv-popover-content{position:relative}.uv-ie8 .uv-popover-content .uv-popover-content-shadow{display:block;background:black;content:'';position:absolute;left:-15px;top:-15px;width:100%;height:100%;filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=15,MakeShadow=true,ShadowOpacity=0.30);z-index:-1}.uv-popover-tail{border:9px solid transparent;width:0;z-index:10;position:absolute;transition:border-top-color 200ms}.uv-top .uv-popover-tail{bottom:-20px;border-top:11px solid white}.uv-bottom .uv-popover-tail{top:-20px;border-bottom:11px solid white}.uv-left .uv-popover-tail{right:-20px;border-left:11px solid white}.uv-right .uv-popover-tail{left:-20px;border-right:11px solid white}.uv-popover-loading{background:white;border-radius:5px;position:absolute;width:100%;height:100%;left:0;top:0}.uv-popover-loading-text{position:absolute;top:50%;margin-top:-0.5em;width:100%;text-align:center}.uv-popover-iframe-container{height:100%}.uv-popover-iframe{border-radius:5px;overflow:hidden}.uv-is-hidden{display:none}.uv-is-invisible{display:block !important;visibility:hidden !important}.uv-is-transitioning{display:block !important}.uv-no-transition{transition:none !important}.uv-fade{opacity:1;transition:opacity 200ms ease-out}.uv-fade.uv-is-hidden{opacity:0}.uv-scale-top,.uv-scale-top-left,.uv-scale-top-right,.uv-scale-bottom,.uv-scale-bottom-left,.uv-scale-bottom-right,.uv-scale-right,.uv-scale-right-top,.uv-scale-right-bottom,.uv-scale-left,.uv-scale-left-top,.uv-scale-left-bottom,.uv-slide-top,.uv-slide-bottom,.uv-slide-left,.uv-slide-right{opacity:1;transition:all 80ms ease-out}.uv-scale-top.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(-15%)}.uv-scale-top-left.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(-15%) translateX(-10%)}.uv-scale-top-right.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(-15%) translateX(10%)}.uv-scale-bottom.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(15%)}.uv-scale-bottom-left.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(15%) translateX(-10%)}.uv-scale-bottom-right.uv-is-hidden{opacity:0;transform:scale(0.8) translateY(15%) translateX(10%)}.uv-scale-right.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(15%)}.uv-scale-right-top.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(15%) translateY(-10%)}.uv-scale-right-bottom.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(15%) translateY(10%)}.uv-scale-left.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(-15%)}.uv-scale-left-top.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(-15%) translateY(-10%)}.uv-scale-left-bottom.uv-is-hidden{opacity:0;transform:scale(0.8) translateX(-15%) translateY(10%)}.uv-slide-top.uv-is-hidden{transform:translateY(-100%)}.uv-slide-bottom.uv-is-hidden{transform:translateY(100%)}.uv-slide-left.uv-is-hidden{transform:translateX(-100%)}.uv-slide-right.uv-is-hidden{transform:translateX(100%)}
+</style><style type="text/css" media="print">#uvTab,.uv-tray,.uv-icon,.uv-popover,.uv-bubble{display:none!important}</style></head>
+
+  <body>
+
+    
+    
+      <!-- start UserVoice -->
+      <script type="text/javascript" defer="">
+        // Once the document is loaded but not stylesheets or subdocuments
+        window.addEventListener('DOMContentLoaded', function() {
+          var api_key = 'O5SLs1K1RfWhBYkHvMaXTg'; // pragma: whitelist secret
+          var forum_id = '246775';
+
+          // Include the UserVoice JavaScript SDK (only needed once on a page)
+          UserVoice = window.UserVoice || [];
+          (function () {
+            var uv = document.createElement('script');
+            uv.type = 'text/javascript';
+            uv.async = true;
+            uv.src = 'https://widget.uservoice.com/' + api_key + '.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(uv, s)
+          })();
+
+          
+            UserVoice.push(['setSSO', '6Ry/3cEmkcGwBokSdAWFBDMdmaOuRFpsSvSQ2MJ5CEndIOoZP%2BruPHegxqV9DTpwco47/r0cnBZFu6TLKp7PwoPvi%2BLLLUpf5jJxfaFKoZ1/Y3Dr%2Bouu5PcDcTUmPuctRztXcABS%2BTgmEfm3mDX1HdIkvB6Vb7tytS1qLbSOAgFNDil6XYhgHJGxXHzPjD5w']);
+          
+
+          //
+          // UserVoice Javascript SDK developer documentation:
+          // https://www.uservoice.com/o/javascript-sdk
+          //
+          UserVoice.push(['showTab', 'classic_widget', {
+            mode: 'full',
+            primary_color: '#19496A',
+            link_color: '#007dbf',
+            default_mode: 'support',
+            tab_label: "Support/Feedback",
+            tab_color: '#19496A',
+            tab_position: 'middle-right',
+            tab_inverted: false
+          }]);
+
+          // Post new ideas to IBM Data Scientist Workbench forum
+          UserVoice.push(['set', 'forum_id', forum_id]);
+
+          
+            UserVoice.push(['identify', {
+              email: 'mohammadshaik351@gmail.com',
+              name: ' '
+            }]);
+          
+        });
+
+      </script>
+      <!-- end UserVoice -->
+    
+
+    
+      <script defer="">
+        var appcuesLoader = document.createElement("script");
+
+        appcuesLoader.addEventListener("load", function() {
+          function configureAppcues() {
+            // Adblockers can block Appcues
+            if (Appcues) {
+              
+                Appcues.identify('mohammadshai');
+              
+            }
+          }
+
+          if (Appcues) {
+            configureAppcues();
+          } else {
+            setTimeout(function(){ configureAppcues(); }, 500);
+          }
+        });
+
+        appcuesLoader.src = 'https://fast.appcues.com/37753.js';
+        // Defer is better than async because it doesn't block rendering
+        appcuesLoader.defer = true;
+        document.getElementsByTagName("script")[0].parentNode.appendChild(appcuesLoader);
+      </script>
+
+    
+
+    
+      <script src="./Apache Kafka Skills Network Labs_files/bundle.min.js"></script>
+    
+
+
+    <div class="page-container">
+    
+      <nav class="navbar">
+  <div class="nav-header">
+
+    <div class="navbar-section left">
+
+      <button class="skills-network-home">
+        <img class="sn-logo light">
+        <img class="sn-logo dark">
+        <span class="home-title">Skills Network Labs</span>
+      </button>
+
+      <div class="custom-logo flex items-center justify-between">
+        <div id="navbar-logo-divider"></div>
+        <span id="navbar-logo-wrapper" class="navbar-brand" style="margin-left: 0;">
+          <img id="partner-logo" style="height:20px; max-width: 150px; max-height: 20px;">
+        </span>
+      </div>
+
+    </div>
+
+    <div class="navbar-section right">
+
+      <div class="flex items-center justify-between gap-2">
+        <span class="toggle-theme-icon dark h-4 w-4"></span>
+        <button type="button" onclick="changeTheme(event)" id="toggle-theme-button" class="relative inline-flex flex-shrink-0 h-5 w-10 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none" role="switch" aria-checked="false">
+          <span class="sr-only">Dark/light mode</span>
+          <span aria-hidden="true" id="toggle-theme-button-selector" class="translate-x-0 pointer-events-none inline-block h-4 w-4 rounded-full shadow transform ring-0 transition ease-in-out duration-200"></span>
+        </button>
+      </div>
+
+      <!-- noticeable widget -->
+      <button class="menu-button icon" id="noticeable-widget" title="What&#39;s new" aria-label="What&#39;s New"></button>
+
+      <div class="menu-dropdown">
+        <button class="menu-button icon" id="notifications" title="Notifications" aria-label="Notifications" onclick="toggleNotifications(event)"></button>
+        <span id="notifications_count"></span>
+        <div class="dropdown-toggle" style="right: 0;">
+          <ul id="notifications">
+            <!-- gets cleared out if notifications are found -->
+            <li class="no-notifications">No more notifications to read!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-dropdown">
+        <button class="menu-button drop">Account<span class="menu-dropdown-arrow"></span></button>
+        <div class="dropdown-content" style="right: 0;">
+          <a href="https://labs.cognitiveclass.ai/profile">Profile</a>
+          <a href="https://labs.cognitiveclass.ai/session_history">Session History</a>
+          <a target="_blank" href="https://www.ibm.com/legal">Terms</a>
+          <a href="https://labs.cognitiveclass.ai/logout">Logout</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  nav.navbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    border: none;
+
+    --header-bg: #222222;
+    --header-text: #CCCCCC;
+    --header-icon: #CCCCCC;
+    --dropdown-bg: #1C1E1F;
+    --dropdown-link-text: #CCCCCC;
+    --dropdown-link-bg-hover: #393939;
+    --dropdown-link-text-hover: #CCCCCC;
+    --menu-button-no-dropdown-text: #B2C4D8;
+    --dropdown-filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.5));
+    --notification-text: #F4F4F4;
+    --notification-bg: #262626;
+    --notification-accent: #A600C1;
+    --toggle-bg: #3C3C3C;
+    --toggle-selector: #8D8D8D;
+  }
+
+  nav.navbar.light {
+    --header-bg: #FFFFFF;
+    --header-text: #121619;
+    --header-icon: #697077;
+    --dropdown-bg: #FFFFFF;
+    --dropdown-link-text: #697077;
+    --dropdown-link-bg-hover: #F2F4F8;
+    --dropdown-link-text-hover: #121619;
+    --menu-button-no-dropdown-text: #1569CE;
+    --dropdown-filter: drop-shadow(0px 5px 2px rgba(18, 22, 25, 0.03));
+    --notification-text: #666666;
+    --notification-bg: #FFFFFF;
+    --notification-accent: #1B52DA;
+    --toggle-bg: #DDE1E6;
+    --toggle-selector: #A0A6AC;
+  }
+
+  div.nav-header {
+    position: relative;
+    width: 100%;
+    padding: 10px 25px;
+    background-color: var(--header-bg);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--header-text);
+    font-size: 14px;
+    height: min-content;
+  }
+
+  div.navbar-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: min-content;
+    flex-wrap: wrap;
+  }
+
+  div.navbar-section button {
+    font-weight: normal;
+    cursor: pointer;
+  }
+
+  div.navbar-section button.menu-button {
+    color: var(--menu-button-no-dropdown-text);
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 10px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  div.navbar-section button.menu-button a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  div.navbar-section button.menu-button.drop {
+    color: var(--header-text);
+  }
+
+  div.navbar-section button.menu-button.drop>span.menu-dropdown-arrow {
+    background-color: var(--header-text);
+    width: 6px;
+    height: 2.5px;
+    mask-image: url('/static/images/svg/arrow-down.svg');
+    -webkit-mask-image: url('/static/images/svg/arrow-down.svg');
+    vertical-align: middle;
+    margin-left: 6px;
+    display: inline-block;
+  }
+
+  div.navbar-section button.menu-button.icon {
+    background-color: var(--header-icon);
+    vertical-align: text-top;
+    display: inline-block;
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+  }
+
+  div.navbar-section button.menu-button.icon#noticeable-widget {
+    width: 19px;
+    height: 15px;
+    mask-image: url('/static/images/svg/speakerphone.svg');
+    -webkit-mask-image: url('/static/images/svg/speakerphone.svg');
+  }
+
+  div.navbar-section button.menu-button.icon#notifications {
+    width: 15.46px;
+    height: 16.5px;
+    mask-image: url('/static/images/svg/bell.svg');
+    -webkit-mask-image: url('/static/images/svg/bell.svg');
+  }
+
+  div.navbar-section.left {
+    margin-right: 15px;
+    gap: 0px 50px;
+  }
+
+  div.navbar-section.left>button.skills-network-home {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    pointer-events: none;
+    width: max-content;
+  }
+
+  button.skills-network-home {
+    display: flex;
+    align-items: center;
+  }
+
+  button.skills-network-home>span.home-title {
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--header-text);
+  }
+
+  button.skills-network-home>img.sn-logo {
+    display: inline;
+    height: 35px;
+    margin-right: 12px;
+    width: 35px;
+  }
+
+  button.skills-network-home>img.sn-logo.light {
+    content: url('/static/images/svg/SN_grayscale_lightmode_tree.svg');
+  }
+
+  button.skills-network-home>img.sn-logo.dark {
+    content: url('/static/images/svg/SN_grayscale_darkmode_tree.svg');
+  }
+
+  nav.navbar.light button.skills-network-home>img.sn-logo.dark {
+    display: none;
+  }
+
+  nav.navbar.light button.skills-network-home>img.sn-logo.light {
+    display: inline;
+  }
+
+  nav.navbar button.skills-network-home>img.sn-logo.light {
+    display: none;
+  }
+
+  div.navbar-section.right {
+    gap: 10px 30px;
+  }
+
+  div.dropdown-content,
+  div.dropdown-toggle {
+    display: none;
+    position: absolute;
+    margin-top: 0px;
+    background-color: var(--dropdown-bg);
+    min-width: 130px;
+    filter: var(--dropdown-filter);
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  div.dropdown-toggle.show {
+    display: block;
+    margin-top: 10px;
+  }
+
+  div.dropdown-content>a {
+    color: var(--dropdown-link-text);
+    padding: 8px 20px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    transition: 300ms ease-in-out;
+    -webkit-transition: 300ms ease-in-out;
+    transition-property: all;
+    -webkit-transition-property: all;
+  }
+
+  div.dropdown-content>a:hover {
+    background-color: var(--dropdown-link-bg-hover);
+    color: var(--dropdown-link-text-hover);
+  }
+
+  div.dropdown-content>a:first-child:hover {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  div.dropdown-content>a:last-child:hover {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  div.navbar-section div.menu-dropdown {
+    position: relative;
+  }
+
+  div.navbar-section div.menu-dropdown:hover div.dropdown-content {
+    display: block;
+  }
+
+  .visible-iframe {
+    opacity: 1;
+    z-index: 2;
+    visibility: visible;
+  }
+
+  div.custom-logo {
+    display: none;
+    margin-left: -38px;
+    min-height: 16px;
+  }
+
+  div.custom-logo div#navbar-logo-divider {
+    width: 1px;
+    height: 16px;
+    background: #ccc;
+    margin-right: 17px;
+  }
+
+  div.custom-logo span#navbar-logo-wrapper {
+    height: min-content;
+    width: min-content;
+  }
+
+  /** styling for notifications **/
+  ul#notifications {
+    list-style-type: none;
+    padding: 15px 0;
+    margin: 0;
+    max-height: 520px;
+    width: 300px;
+    overflow-y: auto;
+    color: var(--notification-text);
+    background-color: var(--notification-bg);
+    border-radius: inherit;
+  }
+
+  ul#notifications li {
+    margin: 10px 20px;
+  }
+
+  ul#notifications li.notification {
+    border-left: 11px solid var(--notification-accent);
+    padding-left: 27px;
+  }
+
+  ul#notifications li.notification.read {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  ul#notifications li.no-notifications {
+    text-align: center;
+  }
+
+  ul#notifications li#previous_notifications {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  span#mark_all_read {
+    cursor: pointer;
+    background: var(--notification-accent);
+    border-radius: 4px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  span.toggle-theme-icon {
+    background-color: #9d9d9d;
+    vertical-align: text-top;
+    display: inline-block;
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+  }
+
+  span.toggle-theme-icon.dark {
+    mask-image: url('/static/images/svg/moon.svg');
+    -webkit-mask-image: url('/static/images/svg/moon.svg');
+  }
+
+  span.toggle-theme-icon.light {
+    mask-image: url('/static/images/svg/sun.svg');
+    -webkit-mask-image: url('/static/images/svg/sun.svg');
+  }
+
+  button#toggle-theme-button {
+    background-color: var(--toggle-bg);
+    padding: 0;
+  }
+
+  button#toggle-theme-button>span#toggle-theme-button-selector {
+    background-color: var(--toggle-selector);
+  }
+</style>
+
+
+<script src="./Apache Kafka Skills Network Labs_files/comms_vars.js"></script>
+
+<script src="./Apache Kafka Skills Network Labs_files/ui_requests.js"> </script>
+
+<script>
+  $(document).ready(function () {
+    if (!localStorage.getItem("currentTheme")) {
+      localStorage.setItem("currentTheme", "dark");
+    }
+    if (localStorage.getItem("currentTheme") == "light") {
+      $('nav.navbar').toggleClass("light");
+      $('span#toggle-theme-button-selector').addClass('translate-x-5').removeClass('translate-x-0');
+      $('span.toggle-theme-icon').addClass('light').removeClass('dark');
+      $('button#toggle-theme-button').attr("aria-checked", "true");
+      if (!$('nav.navbar').hasClass('light')) {
+        $('nav.navbar').addClass('light');
+      };
+    }
+    setFramesOrigin('https://author-ide.skills.network', 'https://theiadocker-0-labs-prod-theiak8s-4-tor01.labs.cognitiveclass.ai/oauth_login?next=%2Fhub%2Fspawn%3F');
+  });
+</script>
+
+<script src="./Apache Kafka Skills Network Labs_files/socket.io.min.js"></script>
+<script src="./Apache Kafka Skills Network Labs_files/notifications_ws.js"></script>
+
+<script>
+  var websocket_url = "https://websocket-service.skills.network";
+  var websocket_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzSW4iOiIyNGgiLCJ0b29sIjoiY2xvdWQtaWRlLWt1YmVybmV0ZXMiLCJ1c2VybmFtZSI6Im1vaGFtbWFkc2hhaSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjc5NDQ2MTA3LCJleHAiOjE2Nzk1MzI1MDd9.ADVPlKxmSdfiVV16n1NYJxOgPDKFPw8SUMwGleWru9I";
+  startReceiveNotifications(websocket_token, websocket_url)</script>
+
+<script>
+  // toggle popups
+  function toggleNotifications(event) {
+    const button = $(event.target);
+    const parentContainer = button.parent("div.menu-dropdown");
+    parentContainer.children('div.dropdown-toggle').first().toggleClass("show");
+  }
+
+  function changeTheme(event) {
+    const toggle = $(event.target);
+    if (localStorage.getItem("currentTheme") === "dark") {
+      // dark -> light
+      localStorage.setItem("currentTheme", "light");
+      updated_color = "light";
+      $('span#toggle-theme-button-selector').addClass('translate-x-5').removeClass('translate-x-0');
+      $('span.toggle-theme-icon').addClass('light').removeClass('dark');
+      toggle.attr("aria-checked", "true");
+    } else {
+      // light -> dark
+      localStorage.setItem("currentTheme", "dark");
+      updated_color = "dark";
+      $('span#toggle-theme-button-selector').addClass('translate-x-0').removeClass('translate-x-5');
+      $('span.toggle-theme-icon').addClass('dark').removeClass('light');
+      toggle.attr("aria-checked", "false");
+    };
+    $('nav.navbar').toggleClass("light");
+
+    //update theme for author-ide and theia if either is present
+    change_theme(updated_color);
+  }
+</script>
+
+<script>
+  // optionally display custom logo next to labs home button
+  var branding_logo = window.sessionStorage.getItem("branding_logo")
+  if (branding_logo) {
+    $('div.custom-logo span#navbar-logo-wrapper img#partner-logo').attr('src', branding_logo)
+    document.querySelector("div.custom-logo").style.display = "flex";
+  }
+</script>
+      
+    
+
+    
+    
+
+    
+
+      
+        
+
+        
+          
+
+          
+
+          <script>
+            $(document).ready(function(){
+              setTimeout(function(){
+                if (document.getElementById("warning-alert")) {
+                  document.getElementById("warning-alert").remove();
+                };
+                if (document.getElementById("cleanup-warning")) {
+                  document.getElementById("cleanup-warning").style.removeProperty("display");
+                };
+              }, 5000);
+            });
+          </script>
+        
+
+        <div class="content-wrapper">
+          <div id="markdown-instructions-wrapper" style="width: calc(40% - 2.5px);"><iframe src="./Apache Kafka Skills Network Labs_files/render.html" name="author_ide_iframe_name" allow="clipboard-read; clipboard-write" style="width: 100%; height: 100%; border: none;"></iframe></div>
+          <div class="gutter gutter-horizontal" style="width: 5px;"></div><div id="eclipse-theia-wrapper" style="width: calc(60% - 2.5px);"><iframe name="tool_iframe_name" id="tool_iframe" src="./Apache Kafka Skills Network Labs_files/oauth_login.html" allow="microphone; camera" style="width: 100%; height: 100%; border: none;"></iframe></div>
+        </div>
+
+        <script>
+          localStorage.setItem("grade_token", "")
+          var token = localStorage.getItem("grade_token")
+          var config = {
+            settings: {
+              showPopoutIcon: false,
+              showMaximiseIcon: false,
+              showCloseIcon: false
+            },
+            content: [{
+              type: 'row',
+              content:[{
+                type: 'component',
+                componentName: 'Instructions',
+                isClosable: false,
+                width: 40,
+              },{
+                type: 'component',
+                componentName: 'Lab',
+                isClosable: false,
+                width: 60,
+              }]
+            }]
+          };
+
+          // fetch markdown instructions
+          var mode = "learn";
+          var instruction_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTS1EQjAyNTBFTi1Ta2lsbHNOZXR3b3JrL2xhYnMvRmluYWwlMjBBc3NpZ25tZW50L1N0cmVhbWluZ19kYXRhX3BlZXJfcmV2aWV3X2Fzc2lnbm1lbnQubWQiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY3OTQ0NjEwOCwiZXhwIjoxNjc5NTMyNTA4fQ.JGBY2_q_u1wrGgfGwl6XVTpoaEnHM1eXn_5To6T89x8";
+          var lab_environment = "published";
+          var atlas_token = "";
+
+          if (instruction_token) {
+            if (mode == "learn" && lab_environment == "draft") {
+              const url = 'https://author-ide.skills.network/preview?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTS1EQjAyNTBFTi1Ta2lsbHNOZXR3b3JrL2xhYnMvRmluYWwlMjBBc3NpZ25tZW50L1N0cmVhbWluZ19kYXRhX3BlZXJfcmV2aWV3X2Fzc2lnbm1lbnQubWQiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY3OTQ0NjEwOCwiZXhwIjoxNjc5NTMyNTA4fQ.JGBY2_q_u1wrGgfGwl6XVTpoaEnHM1eXn_5To6T89x8';
+              const html = `<iframe src="${url}" name=author_ide_iframe_name allow="clipboard-read; clipboard-write" style="width: 100%; height: 100%; border: none;"></iframe>`;
+              $('#markdown-instructions-wrapper').html(html);
+            } else if (mode === "author") {
+              const url = 'https://author-ide.skills.network/edit?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTS1EQjAyNTBFTi1Ta2lsbHNOZXR3b3JrL2xhYnMvRmluYWwlMjBBc3NpZ25tZW50L1N0cmVhbWluZ19kYXRhX3BlZXJfcmV2aWV3X2Fzc2lnbm1lbnQubWQiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY3OTQ0NjEwOCwiZXhwIjoxNjc5NTMyNTA4fQ.JGBY2_q_u1wrGgfGwl6XVTpoaEnHM1eXn_5To6T89x8';
+				      const html = `<iframe src="${url}" name=author_ide_iframe_name allow="clipboard-read; clipboard-write" style="width: 100%; height: 100%; border: none;"></iframe>`;
+              $('#markdown-instructions-wrapper').html(html);
+            } else {
+              const url = 'https://author-ide.skills.network/render?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTS1EQjAyNTBFTi1Ta2lsbHNOZXR3b3JrL2xhYnMvRmluYWwlMjBBc3NpZ25tZW50L1N0cmVhbWluZ19kYXRhX3BlZXJfcmV2aWV3X2Fzc2lnbm1lbnQubWQiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY3OTQ0NjEwOCwiZXhwIjoxNjc5NTMyNTA4fQ.JGBY2_q_u1wrGgfGwl6XVTpoaEnHM1eXn_5To6T89x8';
+              const html = `<iframe src="${url}" name=author_ide_iframe_name allow="clipboard-read; clipboard-write" style="width: 100%; height: 100%; border: none;"></iframe>`;
+              $('#markdown-instructions-wrapper').html(html);
+            }
+          }
+
+          // fetch theia iframe
+          $('#eclipse-theia-wrapper').html( '<iframe name="tool_iframe_name" id="tool_iframe" src="https://theiadocker-0-labs-prod-theiak8s-4-tor01.labs.cognitiveclass.ai/oauth_login?next=%2Fhub%2Fspawn%3F" allow="microphone; camera" style="width: 100%; height: 100%; border: none;"></iframe>' );
+
+          // make div resizable
+          if (instruction_token) {
+            window.Split(['#markdown-instructions-wrapper', '#eclipse-theia-wrapper'], {
+              sizes: [40, 60],
+              gutterSize: 5
+            });
+          } else {
+            document.getElementById("markdown-instructions-wrapper").remove()
+            document.getElementById("eclipse-theia-wrapper").style.width = "100%"
+          }
+
+
+          function sendLTIresult() {
+            if (token.length > 0) {
+              var extractedToken = token.slice(11, -2)
+              try {
+                var grading_domain = ""
+                var grading_url = "https://"+grading_domain+"/lti/results"
+                var xhr = new XMLHttpRequest();
+                xhr.open("PUT", grading_url, true);
+                xhr.setRequestHeader('Authorization', 'Bearer ' + extractedToken);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                  var response = JSON.parse(xhr.responseText);
+                  if (xhr.readyState == 4 && xhr.status == "200") {
+                    document.getElementById('ltiresult').innerHTML = "Completion Registered"
+                    document.getElementById('ltiresult').disabled = "true"
+                  } else {
+                    console.error('an error occured');
+                  }
+                }
+                xhr.send("{}");
+
+              }
+              catch(err) {
+              }
+
+            }
+          }
+
+        </script>
+
+        <script src="./Apache Kafka Skills Network Labs_files/iframe_comms.js"> </script>
+
+        <script>
+          $( document ).ready(function() {
+            setFrames();
+            listenToTheiaLoad();
+            listenToAuthorIDELoad();
+
+            // add comms event listener when everything is loaded
+            $(window).on('load', function () {
+              commsBetweenIframes();
+            });
+
+          });
+        </script>
+        
+      
+
+    
+
+    </div>
+    
+  
+<div></div><div></div><div id="uvTab" style="background: url(&quot;https://widget.uservoice.com/pkg/clients/widget2/tab-right-dark-no-bullhorn-6c8fc4d589a9d68b16c89b8bd810aee48f11a826d292d22d2b5491cd2a072495.png&quot;) 50% 0px no-repeat rgb(25, 73, 106); border-top: 1px solid rgb(255, 255, 255); border-bottom: 1px solid rgb(255, 255, 255); border-left: 1px solid rgb(255, 255, 255); border-image: initial; border-right: none; border-radius: 4px 0px 0px 4px; box-shadow: rgba(255, 255, 255, 0.25) 1px 1px 1px inset, rgba(0, 0, 0, 0.5) 0px 1px 2px; font: bold 14px / 1em Arial, sans-serif; position: fixed; right: 0px; top: 50%; z-index: 9999; margin-top: -81px;" class="uv-tab uv-slide-right " aria-label="Open Feedback Widget"><a id="uvTabLabel" style="background-color: transparent; display:block;padding:10px 5px 10px 5px;text-decoration:none;" href="javascript:void(0);"><img src="./Apache Kafka Skills Network Labs_files/feedback-tab.png" alt="Support/Feedback" style="border:0; background-color: transparent; padding:0; margin:0;"></a></div><iframe frameborder="1" height="0" scrolling="no" tabindex="-1" title="Noticeable Widget" width="0" class="noticeable-view_hidden noticeable-widget-view" allowfullscreen="" src="./Apache Kafka Skills Network Labs_files/index.html" style="border: 0px; opacity: 0; overflow: hidden; user-select: none; visibility: hidden; z-index: -1; box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 40px; border-radius: 8px; height: 520px; width: 420px; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-106px, 54.5px, 0px);" data-popper-placement="bottom-end"></iframe><div id="jobseer-app-root"><div id="jobseer-main-container" class="App_main-container__30IJV App_hidden__39Dij"><div id="jobseer-main" class="App_main__1Yfuq App_hidden__39Dij"><div class="App_main-inner__242iG"><iframe src="./Apache Kafka Skills Network Labs_files/index(1).html" id="jobseer-iframe" title="jobseer content" style="border: none; height: 100%; width: 100%;"></iframe></div></div></div></div></body></html>

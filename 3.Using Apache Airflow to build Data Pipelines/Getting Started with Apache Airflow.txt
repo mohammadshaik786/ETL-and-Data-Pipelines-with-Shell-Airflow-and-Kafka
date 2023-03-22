@@ -1,0 +1,21 @@
+Exercise 1 - Start Apache Airflow
+
+    start_airflow
+
+Exercise 2 - Open the Airflow Web UI
+
+Use the above cmd output where you get Airflow UI link
+
+Exercise 3 - List all DAGs
+
+    airflow dags list
+
+Exercise 4 - List tasks in a DAG
+
+    airflow tasks list example_bash_operator
+
+Exercise 5 - Pause/Unpause a DAG
+
+    airflow dags unpause tutorial
+
+    airflow dags pause tutorial

@@ -1,0 +1,23 @@
+Exercise 1,2 similar to previous lab
+
+Exercise 3 - Explore the anatomy of a DAG
+
+Just the overview
+
+Exercise 4 - Create a DAG
+
+    my_first_dag.py
+
+Exercise 5 - Submit a DAG
+
+Submitting a DAG is as simple as copying the DAG python file into dags folder in the AIRFLOW_HOME directory.
+    sudo cp my_first_dag.py $AIRFLOW_HOME/dags
+
+Run the command below to list out all the existing DAGs.
+    airflow dags list
+
+Verify that my-first-dag is a part of the output.
+    airflow dags list|grep "my-first-dag"
+
+Run the command below to list out all the tasks in my-first-dag.
+    airflow tasks list my-first-dag

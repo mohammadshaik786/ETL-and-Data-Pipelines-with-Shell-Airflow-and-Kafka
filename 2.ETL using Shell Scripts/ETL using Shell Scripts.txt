@@ -1,0 +1,46 @@
+Hands-on Lab: ETL using shell scripts
+
+Exercise 1 - Extracting data using cut command
+
+The filter command cut helps us extract selected characters or fields from a line of text.
+We can extract a specific column/field from a delimited text file, by mentioning
+· the delimiter using the -d option, or
+· the field number using the -f option.
+
+Exercise 2 - Transforming data using tr.
+
+tr is a filter command used to translate, squeeze, and/or delete characters.
+· The -s option replaces a sequence of a repeated characters with a single occurrence of that character.
+· We can delete specified characters using the -d option.
+
+Exercise 3 - Start the PostgreSQL database.
+
+start the PostgreSQL database.
+    start_postgres
+Running this command from the shell prompt will start the interactive psql client which connects to the PostgreSQL server.
+    `psql --username=postgres --host=localhost`
+
+Note:
+You can access your Postgres database via:
+• The Browser with pgadmin
+• URL: https://mohammadshai-5050.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/browser/
+• Database Password: NzA3Ny1tb2hhbW1h
+• CommandLine: psql --username=postgres --host=localhost
+
+Exercise 4 - Create a table
+
+Run the command below to login to PostgreSQL server.
+    psql --username=postgres --host=localhost
+To connect to this database, run the following command at the ‘postgres=#’ prompt.
+    \c template1
+Run the following statement at the ‘template1=#’ prompt:
+    create table users(username varchar(50),userid int,homedirectory varchar(100));
+Quit the psql client
+To exit the psql client and come back to the Linux shell, run the following command: \q
+
+Exercise 5 - Loading data into a PostgreSQL table.
+
+PostgreSQL command to copy data from a CSV file to a table is COPY. 
+    COPY table_name FROM 'filename' DELIMITERS 'delimiter_character' FORMAT;
+
+Exercise 6 - Execute the final script
